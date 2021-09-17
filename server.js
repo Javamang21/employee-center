@@ -1,26 +1,13 @@
-const mysql = require('mysql2');
+const db = require('./db/connection');
 const express = require('express');
 const inquirer = require('inquirer');
 
-const PORT = process.env.PORT || 3002;
+const PORT = process.env.PORT || 3306;
 const app = express();
 
 // Express middleware
 app.use(express.urlencoded({ extended: false }));
 app.use(express.json());
-
-// Connect to database
-const db = mysql.createConnection(
-    {
-      host: 'localhost',
-      // Your MySQL username,
-      user: 'root',
-      // Your MySQL password
-      password: 'Man0fcode21!',
-      database: 'company'
-    },
-    console.log('Connected to the company database.')
-  );
 
       app.get('/', (req, res) => {
         res.json({
@@ -33,6 +20,10 @@ app.use((req, res) => {
     res.status(404).end();
   });
   
-      app.listen(PORT, () => {
-        console.log(`Server running on port ${PORT}`);
-      });
+  db.connect(err => {
+    if (err) throw err;
+    console.log('Database connected.');
+    app.listen(PORT, () => {
+      console.log(`Server running on port ${PORT}`);
+    });
+  });
