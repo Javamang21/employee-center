@@ -2,7 +2,7 @@ const db = require('./db/connection');
 const express = require('express');
 const inquirer = require('inquirer');
 
-const PORT = process.env.PORT || 3306;
+const PORT = process.env.PORT || 3005;
 const app = express();
 
 // Express middleware
@@ -14,6 +14,7 @@ app.use(express.json());
           message: 'Hello World'
         });
       });
+
 
 // Not Found response for unmatched routes
 app.use((req, res) => {
