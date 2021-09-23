@@ -357,7 +357,7 @@ const addEmployee = () => {
   });
 };
 
-// ------------------------------------------------- UPDATE -------------------------------------------------------------------------
+// UPDATE company Info
 
 // Update an Employee's Role
 const updateEmployeeRole = () => {
@@ -477,7 +477,7 @@ const updateEmployeeManager = () => {
   });
 };
 
-// -------------------------------------- REMOVE --------------------------------------------------------
+//  REMOVE Company Data
 
 // Delete an Employee
 const removeEmployee = () => {
@@ -525,7 +525,7 @@ const removeEmployee = () => {
 const removeRole = () => {
   let sql = `SELECT roles.id, roles.title FROM roles`;
 
-  connection.promise().query(sql, (error, response) => {
+  db.query(sql, (error, response) => {
     if (error) throw error;
     let roleNamesArray = [];
     response.forEach((roles) => {roleNamesArray.push(roles.title);});
